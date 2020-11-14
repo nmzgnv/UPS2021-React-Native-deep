@@ -1,21 +1,9 @@
 import React from 'react';
 
-import {
-    Button,
-    View,
-    Text,
-    StyleSheet,
-    TextInput,
-    TouchableOpacity,
-} from 'react-native';
-import { circle } from 'react-native/Libraries/Animated/src/Easing';
-import { create } from 'react-test-renderer';
+import {View, Text, StyleSheet, TextInput,} from 'react-native';
 
-const MainButton = ({ onPress, title }) => (
-    <TouchableOpacity onPress={onPress} style={mainButtonStyles.Container}>
-        <Text style={mainButtonStyles.Text}>{title}</Text>
-    </TouchableOpacity>
-);
+import MainButton from './MainButton'
+
 
 const LoginScreen = () => {
     const [email, onChangeEmail] = React.useState('Enter email...');
@@ -57,7 +45,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Roboto',
         fontWeight: "700",
         textAlign: 'left',
-        marginBottom: 106,
+        marginBottom: 80,
     },
     formHeader: {
         fontSize: 21,
@@ -84,33 +72,6 @@ const styles = StyleSheet.create({
         color: "#999999",
         marginVertical: 29,
     },
-});
-
-const mainButtonStyles = StyleSheet.create({
-    Container: {
-        shadowColor: "#000000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.08,
-        elevation: 1,
-
-        backgroundColor: "#FFE3D3",
-        borderRadius: 10,
-        paddingVertical: 17,
-        paddingHorizontal: 17,
-        marginTop: 'auto'
-    },
-    Text: {
-        fontSize: 18,
-        fontWeight: 900,
-        lineHeight: 21,
-        fontFamily: 'Roboto',
-        color: "#323232",
-        fontWeight: "bold",
-        alignSelf: "center"
-    }
 });
 
 
