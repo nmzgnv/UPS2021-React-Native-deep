@@ -1,5 +1,11 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
+
+export const textStyleParent = {
+    color: '#323232',
+    fontFamily: 'Roboto',
+    fontWeight: "700",
+};
 
 
 styles = StyleSheet.create({
@@ -13,20 +19,16 @@ styles = StyleSheet.create({
     },
     header: {
         marginTop: 31,
-        fontSize: 48,
-        lineHeight: 56.25,
-        color: '#323232',
-        fontFamily: 'Roboto',
-        fontWeight: "700",
         textAlign: 'left',
         marginBottom: 80,
+        ...textStyleParent,
+        fontSize: 48,
+        lineHeight: 56.25,
     },
     h2: {
+        ...textStyleParent,
         fontSize: 21,
         lineHeight: 24.61,
-        color: '#323232',
-        fontFamily: 'Roboto',
-        fontWeight: "700",
     },
     textInput: {
         shadowColor: '#000000',

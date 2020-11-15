@@ -27,11 +27,10 @@ const mainButtonStyles = StyleSheet.create({
     },
     Text: {
         fontSize: 18,
-        fontWeight: 900,
+        fontWeight: "900",
         lineHeight: 21,
         fontFamily: 'Roboto',
         color: "#323232",
-        fontWeight: "bold",
         alignSelf: "center"
     }
 });

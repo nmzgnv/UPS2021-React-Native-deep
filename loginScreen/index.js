@@ -19,7 +19,7 @@ const LoginScreen = () => {
                 value={email}
             />
             <Text style={styles.h2}>Password</Text>
-            <TextInput
+            <TextInput clearButtonMode='always'
                 style={styles.textInput}
                 onChangeText={text => onChangePassword(text)}
                 value={password}
