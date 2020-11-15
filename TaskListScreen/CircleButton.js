@@ -1,7 +1,5 @@
 import React from 'react';
-
 import { Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { color } from 'react-native-reanimated';
 import { textStyleParent } from '../commonStyles';
 
 
@@ -27,7 +25,7 @@ const circleButtonStyles = StyleSheet.create({
         borderRadius: 25,
         backgroundColor: '#FFE3D3',
         justifyContent: 'center',
-        
+
         position: 'absolute',
         bottom: 34,
         right: 20,

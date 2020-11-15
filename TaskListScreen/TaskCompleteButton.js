@@ -1,8 +1,5 @@
 import React from 'react';
-
 import { Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { color } from 'react-native-reanimated';
-import { textStyleParent } from '../commonStyles';
 
 const TaskCompleteButton = ({ onPress, title }) => (
     <TouchableOpacity onPress={onPress} style={taskButtonStyles.Container}>

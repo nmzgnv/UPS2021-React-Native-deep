@@ -2,53 +2,22 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
-import {
-  Button,
-  View,
-  Text,
-  StyleSheet,
-} from 'react-native';
+import LoginScreen from './loginScreen/index'
+import NewTaskScreen from './NewTaskScreen/index'
+import TaskListScreen from './TaskListScreen/index'
 
 const Stack = createStackNavigator();
-
-const HomeScreen = ({ navigation }) => {
-  return (
-    <Button
-      title="Go to Jane's profile"
-      onPress={() =>
-        navigation.navigate('Profile', { name: 'Jane' })
-      }
-    />
-  );
-};
-
-const ProfileScreen = ({route, navigation }) => {
-  const params = route.params
-  return <Text>This is {params.name}'s profile </Text>;
-};
-
 
 const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{ title: 'Welcome' }}
-        />
-        <Stack.Screen name="Profile" component={ProfileScreen} />
+        <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Tasks" component={TaskListScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="New Task" component={NewTaskScreen} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-
-  },
-});
-
 
 export default App;
