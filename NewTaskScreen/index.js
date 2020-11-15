@@ -5,7 +5,8 @@ import MainButton from '../loginScreen/MainButton';
 import styles from '../commonStyles';
 
 
-const NewTaskScreen = () => {
+const NewTaskScreen = ({ route, nav }) => {
+    const addNewTask = route.params;
     const [taskText, onChangeTaskText] = React.useState('Enter task name...');
     const navigation = useNavigation();
     return (
@@ -19,7 +20,12 @@ const NewTaskScreen = () => {
                 clearTextOnFocus={true}
                 multiline={true}
             />
-            <MainButton title="Create" onPress={() => { navigation.navigate('Tasks') }} />
+            <MainButton title="Create"
+                onPress={() => { 
+                    addNewTask(taskText);
+                    navigation.navigate('Tasks'); 
+                }}
+            />
         </View>
     )
 }

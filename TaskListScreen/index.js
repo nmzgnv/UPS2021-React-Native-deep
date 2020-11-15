@@ -1,23 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { View, Text, StyleSheet, FlatList } from 'react-native';
-
 import { useNavigation } from '@react-navigation/native';
 import Task from './Task'
-import styles from '../commonStyles';
+import styles, { textStyleParent } from '../commonStyles';
 import Circlebutton from './CircleButton'
 import ListItem from './ListItem'
+import 'react-native-get-random-values';
+import { v4 as uuid } from 'uuid';
 
-var taskList = [
-    new Task('0', 'Do a workout', new Date(2021, 11, 3)),
-    new Task('1', 'Study english', new Date(2021, 1, 1)),
-    new Task('2', 'JINGU-BEST-JINGU-BEST-JINGU-BEST-JINGU-BEST-JINGU-BEST-JINGU-BEST-JINGU-BEST', new Date(2021, 1, 1)),
-    new Task('3', '393', new Date(2021, 1, 5)),
-    new Task('4', '390', new Date(2021, 1, 1)),
-    new Task('5', '372', new Date(2021, 1, 1)),
-];
 
 const TaskListScreen = () => {
+    const [taskItems, setTaskItems] = useState(() => [
+        new Task(uuid(), 'Do a workout', new Date(2020, 1)),
+        new Task(uuid(), 'Study english', new Date(2020, 6, 30)),
+        new Task(uuid(), 'JINGU-BEST-JINGU-BEST-JINGU-BEST-JINGU-BEST', new Date(2021, 7, 5)),
+    ])
+
+    const addTaskItem = (text) => {
+        if (text.length > 0){
+            setTaskItems([
+                ...taskItems, 
+                new Task(uuid(), text, new Date())
+            ])
+        }
+    }
+
     const navigation = useNavigation();
     const renderItem = ({ item, index }) => (
         <ListItem title={item.name} date={item.date} side={index % 2 == 0 ? 'flex-start' : 'flex-end'} />
@@ -29,12 +37,12 @@ const TaskListScreen = () => {
             <View style={extendedStyles.taskCounter}>
                 <Text style={[extendedStyles.h2, extendedStyles.taskCounterText]}>10</Text>
             </View>
-            <FlatList style={extendedStyles.taskList} data={taskList}
+            <FlatList style={extendedStyles.taskList} data={taskItems}
                 renderItem={renderItem} keyExtractor={item => item.id}
                 showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}>
             </FlatList>
-            <Circlebutton onPress={() => navigation.navigate('New Task')}></Circlebutton>
+            <Circlebutton onPress={() => navigation.navigate('New Task', addTaskItem)}></Circlebutton>
         </View>
     )
 }

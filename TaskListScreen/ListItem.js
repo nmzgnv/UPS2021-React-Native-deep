@@ -6,8 +6,8 @@ import { textStyleParent } from '../commonStyles';
 
 
 function formatDate(date) {
-    var months = ["", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    return date.getDay().toString() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear();
+    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    return date.getDate() + ' ' + months[date.getMonth() % 12] + ' ' + date.getFullYear();
 }
 
 
