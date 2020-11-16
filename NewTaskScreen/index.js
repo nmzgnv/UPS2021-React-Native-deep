@@ -6,8 +6,9 @@ import styles from '../commonStyles';
 
 
 const NewTaskScreen = ({ route, nav }) => {
+    console.disableYellowBox = true;
     const addNewTask = route.params;
-    const [taskText, onChangeTaskText] = React.useState('Enter task name...');
+    const [taskText, onChangeTaskText] = React.useState('');
     const navigation = useNavigation();
     return (
         <View style={styles.container}>
@@ -19,6 +20,7 @@ const NewTaskScreen = ({ route, nav }) => {
                 value={taskText}
                 clearTextOnFocus={true}
                 multiline={true}
+                placeholder='Enter task name...'
             />
             <MainButton title="Create"
                 onPress={() => { 

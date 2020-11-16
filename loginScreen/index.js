@@ -7,8 +7,10 @@ import { useNavigation } from '@react-navigation/native';
 
 const LoginScreen = () => {
     const navigation = useNavigation();
-    const [email, onChangeEmail] = React.useState('Enter email...');
-    const [password, onChangePassword] = React.useState('Enter password...');
+    const [email, onChangeEmail] = React.useState('');
+    const [password, onChangePassword] = React.useState('');
+
+
     return (
         <View style={styles.container}>
             <Text style={styles.header}>Welcome to a todo app </Text>
@@ -17,12 +19,14 @@ const LoginScreen = () => {
                 style={styles.textInput}
                 onChangeText={text => onChangeEmail(text)}
                 value={email}
+                placeholder='Enter email...'
             />
             <Text style={styles.h2}>Password</Text>
             <TextInput clearButtonMode='always'
                 style={styles.textInput}
                 onChangeText={text => onChangePassword(text)}
                 value={password}
+                placeholder='Enter password...'
             />
             <MainButton title="Login" onPress={() => navigation.navigate('Tasks')} />
         </View>

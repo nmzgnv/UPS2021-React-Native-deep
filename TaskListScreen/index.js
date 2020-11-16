@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Task from './Task'
-import styles, { textStyleParent } from '../commonStyles';
+import styles from '../commonStyles';
 import Circlebutton from './CircleButton'
 import ListItem from './ListItem'
 import 'react-native-get-random-values';
@@ -11,19 +11,42 @@ import { v4 as uuid } from 'uuid';
 
 
 const TaskListScreen = () => {
+
     const [taskItems, setTaskItems] = useState(() => [
         new Task(uuid(), 'Do a workout', new Date(2020, 1)),
         new Task(uuid(), 'Study english', new Date(2020, 6, 30)),
         new Task(uuid(), 'JINGU-BEST-JINGU-BEST-JINGU-BEST-JINGU-BEST', new Date(2021, 7, 5)),
     ])
 
+    const [loadingTasks, setLoadingTasks] = useState(false);
+
     const addTaskItem = (text) => {
-        if (text.length > 0){
-            setTaskItems([
-                ...taskItems, 
-                new Task(uuid(), text, new Date())
-            ])
-        }
+        console.log(text, '\n');
+        if (text.length > 0) {
+            setTaskItems(taskItems =>
+                taskItems.concat(new Task(uuid(), text, new Date()))
+            );
+        };
+        console.log(taskItems.length);
+    }
+
+    const getTasksFromApi = () => {
+        setLoadingTasks(true);
+        const tasksNum = 20;
+        return fetch('https://jsonplaceholder.typicode.com/todos')
+            .then(response => response.json())
+            .then(json => {
+                var slicedJson = json.slice(0, tasksNum)
+                slicedJson.forEach(task => {
+                    addTaskItem(task.title);
+                });
+            })
+            .catch((error) => {
+                console.error(error);
+            })
+            .finally(() => {
+                setLoadingTasks(false);
+            })
     }
 
     const navigation = useNavigation();
@@ -40,7 +63,9 @@ const TaskListScreen = () => {
             <FlatList style={extendedStyles.taskList} data={taskItems}
                 renderItem={renderItem} keyExtractor={item => item.id}
                 showsVerticalScrollIndicator={false}
-                showsHorizontalScrollIndicator={false}>
+                showsHorizontalScrollIndicator={false}
+                refreshing={loadingTasks}
+                onRefresh={getTasksFromApi}>
             </FlatList>
             <Circlebutton onPress={() => navigation.navigate('New Task', addTaskItem)}></Circlebutton>
         </View>
